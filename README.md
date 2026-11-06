@@ -1,0 +1,75 @@
+# Qubitor AI_Ramanujan v0.2.0 — Industrial Backend Foundation
+
+AI_Ramanujan is Qubitor's classical mathematical solver SDK. It has no FPGA, CMOS annealer, quantum or other annealing-hardware dependency.
+
+## Product architecture
+
+This repository is the shared codebase for six product modules: **Core**, **Optimisation**, **Scientific**, **Complex**, **Number Theory**, and **SDK**. The current release adds a stable result contract, a unified Python facade, and production-oriented adapters to established numerical backends. It is an engineering foundation, not yet a complete industrial solver suite.
+
+## Install
+
+```bash
+python -m pip install -e '.[industrial]'
+# Or install the complete optional Python stack
+python -m pip install -e '.[all]'
+```
+
+## Unified API
+
+```python
+from ramanujan import Ramanujan
+
+engine = Ramanujan()
+result = engine.solve(
+    "optimisation.lp",
+    c=[-3.0, -2.0],
+    A_ub=[[1.0, 1.0], [1.0, 0.0], [0.0, 1.0]],
+    b_ub=[4.0, 2.0, 3.0],
+    bounds=[(0, None), (0, None)],
+)
+print(result.status, result.solution, result.objective)
+print(result.as_dict())
+```
+
+## Current backend APIs
+
+| Capability | API | Backend |
+|---|---|---|
+| Dense real/complex linear systems | `solve_linear_system` | SciPy LAPACK |
+| Sparse linear systems | `solve_sparse_linear_system` | SciPy sparse solvers |
+| Linear programming | `solve_lp` | SciPy `linprog` / HiGHS |
+| Mixed-integer linear programming | `solve_milp` | SciPy `milp` / HiGHS |
+| Nonlinear root systems | `solve_nonlinear_root` | SciPy `root` |
+| Continuous nonlinear optimisation | `minimize` | SciPy `optimize.minimize` |
+| Adaptive quadrature | `integrate_quad` | SciPy QUADPACK interface |
+| Initial-value ODE systems | `solve_ode` | SciPy `solve_ivp` |
+| Regularised inverse least squares | `tikhonov` | SciPy sparse LSMR |
+
+The original v0.1.0 algorithms remain available. The new adapters preserve solver status, message, runtime, iterations and selected diagnostics. A returned `success` flag is not a mathematical certificate; users must inspect status and residuals and validate application-specific constraints.
+
+## Product-module roadmap
+
+- **Core:** stable C++ ABI, memory/error model, logging, cancellation, diagnostics, independent result verification.
+- **Optimisation:** sparse LP/MILP/QP, nonlinear constrained optimisation, global optimisation options, callbacks, warm starts, MIP gap and certificates where backend supports them.
+- **Scientific:** sparse direct/iterative linear algebra, least squares, eigenvalue problems, robust ODE/DAE solvers, interpolation and quadrature.
+- **Complex:** complex-valued numerical linear algebra, phase retrieval, inverse scattering and regularisation methods with uncertainty/residual reporting.
+- **Number Theory:** arbitrary-precision arithmetic, primality/factorisation and polynomial algorithms; exactness and probabilistic guarantees explicitly distinguished.
+- **SDK:** stable Python/C++ API, packaging, ABI/API compatibility tests, examples, documentation and local deployment.
+
+## Industrial release gates
+
+Do not label a module industrial-grade until it passes: (1) numerical/reference validation, (2) adversarial and property-based tests, (3) sparse/large-instance benchmarks, (4) memory and time-limit tests, (5) cross-platform builds, (6) reproducible regression suite, (7) API/ABI compatibility checks, and (8) dependency/SBOM/licence review. The present v0.2.0 package is an **industrial-backend foundation / developer preview**, not a certified or Gurobi/Wolfram replacement.
+
+## Build and tests
+
+```bash
+python -m unittest discover -s tests -v
+cmake -S cpp -B cpp/build
+cmake --build cpp/build
+ctest --test-dir cpp/build --output-on-failure
+```
+
+## Commercial distribution note
+
+Qubitor's proprietary licence applies to Qubitor-authored code. Third-party libraries retain their own licences. Review the exact versions, transitive dependencies, static/dynamic linking choices, notices and redistribution terms before shipping commercial binaries.
+# qubi_ramanujan
