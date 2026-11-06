@@ -1,0 +1,21 @@
+{
+ "product":"AI_Ramanujan",
+ "version":"0.1.0",
+ "category":"Classical mathematical solvers",
+ "hardware_required":false,
+ "solver_families":[
+  {"id":"linear_algebra","solvers":["Gaussian elimination","LU factorization","QR least squares","Conjugate gradient","Power iteration"]},
+  {"id":"nonlinear_equations","solvers":["Bisection","Newton-Raphson","Secant","Newton systems"]},
+  {"id":"calculus","solvers":["Finite-difference derivative","Composite Simpson integration","Adaptive Simpson integration","Runge-Kutta 4 ODE"]},
+  {"id":"numerical_optimization","solvers":["Gradient descent","Newton minimization","BFGS","Coordinate descent"]},
+  {"id":"mathematical_optimization","solvers":["Small LP vertex enumeration","Basic branch-and-bound MILP"]},
+  {"id":"graph_theory","solvers":["Dijkstra","Bellman-Ford","Floyd-Warshall","Kruskal MST","Edmonds-Karp max flow","Bipartite matching"]},
+  {"id":"combinatorial_optimization","solvers":["0-1 knapsack DP","Held-Karp TSP","Maximum independent set exact","Max-Cut exact"]},
+  {"id":"number_theory","solvers":["GCD","Extended GCD","Modular inverse","Miller-Rabin primality","Trial-division factorization","Chinese remainder theorem","Integer square root"]},
+  {"id":"complex_mathematics","solvers":["Complex Gaussian elimination","Polynomial roots via NumPy"]},
+  {"id":"inverse_problems","solvers":["Tikhonov least squares","Real phase retrieval Gauss-Newton"]},
+  {"id":"statistics_probability","solvers":["Linear regression","Covariance matrix","Pearson correlation"]},
+  {"id":"information_theory","solvers":["Entropy","Cross entropy","KL divergence","Mutual information"]},
+  {"id":"symbolic_mathematics","solvers":["SymPy simplify","Symbolic solve","Symbolic differentiation","Symbolic integration","Symbolic limits"]}
+ ]
+}

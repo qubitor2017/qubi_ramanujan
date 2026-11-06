@@ -1,0 +1,25 @@
+[build-system]
+requires=["setuptools>=68","wheel"]
+build-backend="setuptools.build_meta"
+[project]
+name="qubitor-ai-ramanujan"
+version="0.2.0"
+description="Classical mathematical and optimization solver library"
+readme="README.md"
+requires-python=">=3.10"
+license={text="Proprietary - Qubitor Labs"}
+dependencies=[]
+[project.optional-dependencies]
+numpy=["numpy>=1.24"]
+scipy=["numpy>=1.24","scipy>=1.10"]
+symbolic=["sympy>=1.12"]
+industrial=["numpy>=1.24","scipy>=1.11"]
+optimisation=["numpy>=1.24","scipy>=1.11"]
+scientific=["numpy>=1.24","scipy>=1.11"]
+complex=["numpy>=1.24","scipy>=1.11"]
+number-theory=["sympy>=1.12","mpmath>=1.3"]
+sdk=["numpy>=1.24","scipy>=1.11"]
+all=["numpy>=1.24","scipy>=1.11","sympy>=1.12","mpmath>=1.3"]
+test=[]
+[tool.setuptools.packages.find]
+include=["ramanujan*"]

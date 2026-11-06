@@ -1,0 +1,2 @@
+Copyright (c) 2026 Qubitor Labs. All rights reserved.
+This package is provided for evaluation and development. No redistribution, sublicensing, or commercial use is granted without a separate written license from Qubitor Labs.
